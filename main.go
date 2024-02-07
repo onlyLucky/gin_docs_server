@@ -1,8 +1,18 @@
 package main
 
-import "gin_docs_server/routers"
+import (
+	"fmt"
+	"gin_docs_server/core"
+	"gin_docs_server/global"
+	"gin_docs_server/routers"
+)
 
 func main() {
+
+	global.Config = core.InitConfig()
+	fmt.Println(global.Config)
+
+	addr := global.Config.System.GetAddr()
 	route := routers.InitRouter();
-	route.Run("8080")
+	route.Run(addr)
 }
