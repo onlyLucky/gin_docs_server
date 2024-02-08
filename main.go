@@ -8,9 +8,15 @@ import (
 )
 
 func main() {
-	global.Log = core.InitLogger()
+	global.Log = core.InitLogger(core.LogRequest{
+		LogPath: "logs",
+		AppName: "gvd",
+	})
 	global.Config = core.InitConfig()
 	fmt.Println(global.Config)
+	global.Log.Errorf("2333")
+	global.Log.Infof("1111")
+	global.Log.Errorf("2222")
 	addr := global.Config.System.GetAddr()
 	route := routers.InitRouter();
 	route.Run(addr)
