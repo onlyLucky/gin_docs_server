@@ -13,6 +13,8 @@ func DB(){
 	err := global.DB.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(
 		&models.UserModel{},
 		&models.RoleModel{},
+		&models.DocModel{},
+		&models.UserCollDocModel{}, // 自定义连接表要放在两个连接表的后面。
 	)
 
 	if err != nil {
