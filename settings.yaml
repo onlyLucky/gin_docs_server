@@ -3,3 +3,11 @@ system:
   ip: 127.0.0.1
   port: 8080
   version: 1.0.1
+mysql:
+  host: 127.0.0.1 # 如果不配置host就不会连接 mysql
+  port: 3306
+  config: charset=utf8mb4&parseTime=True&loc=Local
+  db: gin_docs_db
+  username: root
+  password: root
+  logLevel: info

@@ -13,10 +13,9 @@ func main() {
 		AppName: "gvd",
 	})
 	global.Config = core.InitConfig()
+	global.DB = core.InitMysql()
+	
 	fmt.Println(global.Config)
-	global.Log.Errorf("2333")
-	global.Log.Infof("1111")
-	global.Log.Errorf("2222")
 	addr := global.Config.System.GetAddr()
 	route := routers.InitRouter();
 	route.Run(addr)
