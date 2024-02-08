@@ -16,6 +16,7 @@ func DB(){
 		&models.DocModel{},
 		&models.UserCollDocModel{}, // 自定义连接表要放在两个连接表的后面。
 		&models.RoleDocModel{},
+		&models.ImageModel{},
 	)
 
 	if err != nil {
