@@ -10,7 +10,7 @@ mysql:
   db: gin_docs_db
   username: root
   password: root
-  logLevel: info
+  logLevel: error
 redis:
   ip: 127.0.0.1
   port: 6379

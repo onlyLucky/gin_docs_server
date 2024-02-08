@@ -3,6 +3,7 @@
     "gonic",
     "gorm",
     "Infof",
+    "Inno",
     "logrus",
     "sirupsen"
   ]
