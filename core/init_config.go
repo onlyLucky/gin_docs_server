@@ -9,6 +9,7 @@ import (
 )
 
 const yamlPath = "settings.yaml"
+// 读取yaml 配置初始化
 func InitConfig() (c *config.Config){
 	byteData,err := os.ReadFile(yamlPath)
 	if err != nil {
