@@ -8,10 +8,9 @@ import (
 )
 
 func main() {
-
+	global.Log = core.InitLogger()
 	global.Config = core.InitConfig()
 	fmt.Println(global.Config)
-
 	addr := global.Config.System.GetAddr()
 	route := routers.InitRouter();
 	route.Run(addr)
