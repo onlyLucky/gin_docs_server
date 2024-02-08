@@ -14,7 +14,12 @@ func main() {
 	})
 	global.Config = core.InitConfig()
 	global.DB = core.InitMysql()
+	global.Redis = core.InitRedis()
 	
+	val,err := global.Redis.Get("name").Result()
+	
+	global.Log.Infof(val,err)
+
 	fmt.Println(global.Config)
 	addr := global.Config.System.GetAddr()
 	route := routers.InitRouter();
