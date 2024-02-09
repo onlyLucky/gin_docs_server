@@ -30,7 +30,7 @@ func InitTrans(locale string) (err error) {
 		v.RegisterTagNameFunc(func(fld reflect.StructField) string {
 			name := strings.SplitN(fld.Tag.Get("label"), ",", 2)[0]
 			if name == ""{
-				// 没有label就用json
+				// 没有label的话使用 json
 				name = strings.SplitN(fld.Tag.Get("json"), ",", 2)[0]
 			}
 			if name == "-" {
@@ -90,6 +90,7 @@ func InitTrans(locale string) (err error) {
 }
 
 func Error(err error)(ret string){
+	
 	validationErrors,ok := err.(validator.ValidationErrors)
 	if !ok {
 		return err.Error()
