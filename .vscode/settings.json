@@ -1,11 +1,13 @@
 {
   "cSpell.words": [
+    "dgrijalva",
     "Digg",
     "gonic",
     "gorm",
     "HMAC",
     "Infof",
     "Inno",
+    "jwts",
     "logrus",
     "sirupsen"
   ]
