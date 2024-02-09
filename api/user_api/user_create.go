@@ -1,9 +1,11 @@
 package user_api
 
 import (
+	"fmt"
 	"gin_docs_server/global"
 	"gin_docs_server/models"
 	"gin_docs_server/service/common/res"
+	"gin_docs_server/utils/pwd"
 
 	"github.com/gin-gonic/gin"
 )
@@ -31,10 +33,27 @@ func (UserApi) UserCreateView(c *gin.Context){
 		res.FailWithMsg("用户名已存在",c)
 		return
 	}
+
+	if cr.NickName == ""{
+		// 昵称不存在
+		var maxID uint
+		global.DB.Model(models.UserModel{}).Select("max(id)").Scan(&maxID)
+		cr.NickName = fmt.Sprintf("用户_%d",maxID+1)
+	}
+
+	// 判断角色id
+	var role models.RoleModel
+	err = global.DB.Take(&role, cr.RoleID).Error
+	if err != nil{
+		global.Log.Error(err)
+		res.FailWithMsg("角色不存在",c)
+		return
+	}
+
 	// 创建新用户
 	err = global.DB.Create(&models.UserModel{
 		UserName: cr.UserName,
-		Password:cr.Password,
+		Password:pwd.HashPwd(cr.Password),
 		NickName:cr.NickName,
 		IP:c.RemoteIP(),
 		RoleID:cr.RoleID,
