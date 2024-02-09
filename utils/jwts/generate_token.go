@@ -4,24 +4,24 @@ import (
 	"crypto/rand"
 	"encoding/base64"
 	"fmt"
+	"gin_docs_server/global"
 	"time"
 
 	"github.com/dgrijalva/jwt-go/v4"
-	"github.com/sirupsen/logrus"
 )
 
+// 生成token
 func GenToken(user JwyPayLoad) (string, error) {
-	secretStr,err:= generateRandomSecret()
+	/* secretStr,err:= generateRandomSecret()
 	if err != nil {
 		logrus.Fatalf("生成jwt 秘钥失败err: %s",err.Error())
-	}
-	secretStr = "QX0D5UG6SqlW8So324"
-	Secret = []byte(secretStr)
+	} */
+	Secret = []byte(global.Config.Jwt.Secret)
 	claims := CustomClaims{
 		JwyPayLoad: user,
 		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: jwt.At(time.Now().Add(60*time.Second)),
-			Issuer: "fff",
+			ExpiresAt: jwt.At(time.Now().Add(time.Duration(global.Config.Jwt.Expires)*time.Hour)),
+			Issuer: global.Config.Jwt.Issuer,
 		},
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256,claims)

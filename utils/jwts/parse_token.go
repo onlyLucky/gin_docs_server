@@ -1,7 +1,7 @@
 package jwts
 
 import (
-	"fmt"
+	"gin_docs_server/global"
 
 	"github.com/dgrijalva/jwt-go/v4"
 )
@@ -9,7 +9,7 @@ import (
 // 解析jwt
 func ParseToken(token string) (*CustomClaims, error) {
 	Token,err := jwt.ParseWithClaims(token,&CustomClaims{},func(token *jwt.Token)(interface{},error){
-		return []byte("QX0D5UG6SqlW8So324"),nil
+		return []byte(global.Config.Jwt.Secret),nil
 	})
 	if err != nil {
 		return nil,err
@@ -23,6 +23,5 @@ func ParseToken(token string) (*CustomClaims, error) {
 		// 令牌无效
 		return nil,err
 	}
-	fmt.Println("claims,ok:",claims,ok)
 	return claims,nil
 }

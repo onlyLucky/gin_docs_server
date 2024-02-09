@@ -16,3 +16,7 @@ redis:
   port: 6379
   password: redis
   poolSize: 100
+jwt:
+  expires: 8 # 小时
+  issuer: "fff"
+  secret: "QX0D5UG6SqlW8So324"
