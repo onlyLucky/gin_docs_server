@@ -17,10 +17,13 @@ func DB(){
 		&models.UserCollDocModel{}, // 自定义连接表要放在两个连接表的后面。
 		&models.RoleDocModel{},
 		&models.ImageModel{},
+		&models.UserPwdDocModel{},
+		&models.LoginModel{},
+		&models.DocDataModel{},
 	)
 
 	if err != nil {
-		logrus.Fatalf("数据库迁移失败 err：%s", err.Error())
+		logrus.Fatalf("数据库迁移失败 err:%s", err.Error())
 	}
 	logrus.Infof("数据库迁移成功！！！")
 }

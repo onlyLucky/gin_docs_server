@@ -3,6 +3,7 @@
     "Digg",
     "gonic",
     "gorm",
+    "HMAC",
     "Infof",
     "Inno",
     "logrus",
