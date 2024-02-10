@@ -1,25 +1,39 @@
 package user_api
 
 import (
-	"fmt"
 	"gin_docs_server/global"
 	"gin_docs_server/models"
+	"gin_docs_server/service/common/list"
 	"gin_docs_server/service/common/res"
 
 	"github.com/gin-gonic/gin"
 )
 
 type UserListRequest struct {
-	Page int `json:"page" form:"page"`
-	Limit int `json:"limit" form:"limit"`
-	Key string `json:"key" form:"key"`
+	Page  int    `json:"page" form:"page"`
+	Limit int    `json:"limit" form:"limit"`
+	Key   string `json:"key" form:"key"`
 }
 
 func (UserApi) UserListView(c *gin.Context) {
-	var cr UserListRequest
+	// var cr UserListRequest
+	var cr models.Pagination
 	c.ShouldBindQuery(&cr)
 
-	var users []models.UserModel
+	_list, count, err := list.QueryList[models.UserModel](models.UserModel{}, list.Option{
+		Pagination: cr,
+		Likes:      []string{"nickName", "userName"},
+		Preload:    []string{"RoleModel"},
+		Debug:      true,
+	})
+	if err != nil {
+		global.Log.Error(err)
+		res.FailWithMsg("获取用户列表失败", c)
+		return
+	}
+	res.OKWithList(_list, count, c)
+
+	/* var users []models.UserModel
 	if cr.Limit <= 0 {
 		cr.Limit = 10
 	}
@@ -36,5 +50,7 @@ func (UserApi) UserListView(c *gin.Context) {
 	global.DB.Model(models.UserModel{}).Where(query).Select("count(id)").Scan(&count)
 	// global.DB.Debug().Limit(cr.Limit).Offset(offset).Find(&users)
 	global.DB.Debug().Where(query).Limit(cr.Limit).Offset(offset).Find(&users)
-	res.OKWithList(users,count, c)
+	res.OKWithList(users,count, c) */
+
+	return
 }

@@ -50,4 +50,5 @@ func (UserApi) UserLoginView(c *gin.Context) {
 		return
 	}
 	res.OKWithData(token,c)
+	return
 }
