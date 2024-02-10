@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"gin_docs_server/service/common/res"
+	"gin_docs_server/service/redis_service"
 	"gin_docs_server/utils/jwts"
 
 	"github.com/gin-gonic/gin"
@@ -26,6 +27,15 @@ func JwtAuth() func(c *gin.Context){
 			c.Abort()
 			return
 		}
+
+		// 检测token是否在redis缓存失效中
+		ok := redis_service.CheckLogout(token)
+		if ok {
+			res.FailWithMsg("token已注销",c)
+			c.Abort()
+			return
+		}
+		
 		// 路由设置存储变量
 		c.Set("claims",claims)
 		// c.Get("claims")
