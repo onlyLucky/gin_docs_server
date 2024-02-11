@@ -2,7 +2,6 @@ package user_api
 
 import (
 	"fmt"
-	"gin_docs_server/global"
 	"gin_docs_server/models"
 	"gin_docs_server/service/common/res"
 	"gin_docs_server/utils/jwts"
@@ -21,15 +20,14 @@ func (UserApi) UserInfoView(c *gin.Context) {
 	_claims, _ := c.Get("claims")
 	claims, _ := _claims.(*jwts.CustomClaims)
 
-	var user models.UserModel
-	err := global.DB.Preload("RoleModel").Take(&user, claims.UserID).Error
+	user, err := claims.GetUser()
 	if err != nil {
 		res.FailWithMsg("用户不存在", c)
 		return
 	}
 	fmt.Println(user.RoleModel)
 	info := UserInfoResponse{
-		UserModel: user,
+		UserModel: *user,
 		UserName:  user.UserName,
 		Role:      user.RoleModel.Title,
 	}
