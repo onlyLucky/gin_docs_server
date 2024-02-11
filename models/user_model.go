@@ -1,5 +1,7 @@
 package models
 
+import "time"
+
 // 用户表
 type UserModel struct {
 	Model
@@ -12,5 +14,6 @@ type UserModel struct {
 	IP        string    `gorm:"column:ip;size:16;comment:ip" json:"ip"`                       // ip
 	Address   string    `gorm:"column:address;size:64;comment:地址" json:"address"`             // 地址
 	RoleID    uint      `gorm:"column:roleID;comment:用户对应的角色id" json:"roleID"`                // 用户对应的角色id
-	RoleModel RoleModel `gorm:"foreignKey:RoleID" json:"roleModel"`
+	LastLogin time.Time `gorm:"column:lastLogin" json:"lastLogin"`                            //用户最近一次登录时间
+	RoleModel RoleModel `gorm:"foreignKey:RoleID" json:"-"`                           // json:"roleModel"
 }
