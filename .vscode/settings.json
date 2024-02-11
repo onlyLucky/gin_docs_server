@@ -12,6 +12,7 @@
     "logrus",
     "sirupsen",
     "swaggertype",
-    "swaggo"
+    "swaggo",
+    "webp"
   ]
 }
