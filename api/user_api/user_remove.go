@@ -11,6 +11,14 @@ import (
 	"gorm.io/gorm"
 )
 
+// @Tags 用户管理
+// @Summary 删除用户
+// @Description 删除用户
+// @Param data body models.IDListRequest true "参数"
+// @Param token header string true "token"
+// @Router /api/user [delete]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (UserApi) UserRemoveView(c *gin.Context) {
 	var cr models.IDListRequest
 	err := c.ShouldBindJSON(&cr)

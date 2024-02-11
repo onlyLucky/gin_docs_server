@@ -17,7 +17,14 @@ type UserUpdateRequest struct {
 	RoleID   uint   `json:"roleID"`               // 角色id
 }
 
-
+// @Tags 用户管理
+// @Summary 用户更新
+// @Description 用户更新
+// @Param data body UserUpdateRequest true "参数"
+// @Param token header string true "token"
+// @Router /api/user [put]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (UserApi) UserUpdateView(c *gin.Context){
 	var cr UserUpdateRequest 
 	err := c.ShouldBindJSON(&cr)

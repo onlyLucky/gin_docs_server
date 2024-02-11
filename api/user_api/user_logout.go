@@ -12,6 +12,14 @@ import (
 )
 
 // 退出登录
+
+// @Tags 用户管理
+// @Summary 退出登录
+// @Description 退出登录
+// @Param token header string true "token"
+// @Router /api/logout [post]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (UserApi) UserLogoutView(c *gin.Context) {
 	token := c.Request.Header.Get("token")
 	claims, _ := jwts.ParseToken(token)

@@ -15,6 +15,15 @@ type UserListRequest struct {
 	Key   string `json:"key" form:"key"`
 }
 
+// UserListView 用户列表
+// @Tags 用户管理
+// @Summary 用户列表
+// @Description 用户列表
+// @Param data query models.Pagination true "参数"
+// @Param token header string true "token"
+// @Router /api/user [get]
+// @Produce json
+// @Success 200 {object} res.Response{data=res.ListResponse[models.UserModel]}
 func (UserApi) UserListView(c *gin.Context) {
 	// var cr UserListRequest
 	var cr models.Pagination

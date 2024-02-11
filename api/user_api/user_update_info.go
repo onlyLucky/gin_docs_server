@@ -15,6 +15,14 @@ type UserUpdateInfoRequest struct {
 	Avatar   string `json:"avatar"`
 }
 
+// @Tags 用户管理
+// @Summary 更新用户详情信息
+// @Description 更新用户详情信息
+// @Param data body UserUpdateInfoRequest true "参数"
+// @Param token header string true "token"
+// @Router /api/uploadUserInfo [post]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (UserApi) UserUpdateInfoView(c *gin.Context) {
 	var cr UserUpdateInfoRequest
 	err := c.ShouldBindJSON(&cr)

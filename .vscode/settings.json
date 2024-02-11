@@ -10,6 +10,8 @@
     "Inno",
     "jwts",
     "logrus",
-    "sirupsen"
+    "sirupsen",
+    "swaggertype",
+    "swaggo"
   ]
 }

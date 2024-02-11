@@ -15,6 +15,14 @@ type UserInfoResponse struct {
 	Role     string `json:"role"`
 }
 
+// UserInfoView 用户信息
+// @Tags 用户管理
+// @Summary 用户信息
+// @Description 用户信息
+// @Param token header string true "token"
+// @Router /api/userInfo [get]
+// @Produce json
+// @Success 200 {object} res.Response{data=UserInfoResponse}
 func (UserApi) UserInfoView(c *gin.Context) {
 	// 从token中获取用户的id
 	_claims, _ := c.Get("claims")

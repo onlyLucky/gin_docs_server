@@ -15,6 +15,14 @@ type UserUpdatePasswordRequest struct {
 	Password string `json:"password" binding:"required" label:"新密码"`
 }
 
+// @Tags 用户管理
+// @Summary 更改用户密码
+// @Description 更改用户密码
+// @Param data body UserUpdatePasswordRequest true "参数"
+// @Param token header string true "token"
+// @Router /api/resetPassword [post]
+// @Produce json
+// @Success 200 {object} res.Response{}
 func (UserApi) UserUpdatePasswordView(c *gin.Context) {
 	var cr UserUpdatePasswordRequest
 	err := c.ShouldBindJSON(&cr)
