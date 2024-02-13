@@ -3,12 +3,13 @@ package flags
 import (
 	"gin_docs_server/global"
 	"gin_docs_server/models"
+	"gin_docs_server/plugins/log_stash"
 
 	"github.com/sirupsen/logrus"
 )
 
 // 初始化数据库表结构
-func DB(){
+func DB() {
 	// 创建表时添加后缀
 	err := global.DB.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(
 		&models.UserModel{},
@@ -20,6 +21,7 @@ func DB(){
 		&models.UserPwdDocModel{},
 		&models.LoginModel{},
 		&models.DocDataModel{},
+		&log_stash.LogModel{},
 	)
 
 	if err != nil {

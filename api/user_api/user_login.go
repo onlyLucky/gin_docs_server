@@ -3,6 +3,7 @@ package user_api
 import (
 	"gin_docs_server/global"
 	"gin_docs_server/models"
+	"gin_docs_server/plugins/log_stash"
 	"gin_docs_server/service/common/res"
 	"gin_docs_server/utils/jwts"
 	"gin_docs_server/utils/pwd"
@@ -48,7 +49,8 @@ func (UserApi) UserLoginView(c *gin.Context) {
 
 	// 生成token jwt
 	token, err := jwts.GenToken(jwts.JwyPayLoad{
-		NickName: user.UserName,
+		UserName: user.UserName,
+		NickName: user.NickName,
 		RoleID:   user.RoleID,
 		UserID:   user.ID,
 	})
@@ -61,7 +63,7 @@ func (UserApi) UserLoginView(c *gin.Context) {
 
 	// 更新lastLogin
 	global.DB.Model(&user).Update("lastLogin", time.Now())
-
+	log_stash.NewSuccessLogin(c)
 	res.OKWithData(token, c)
 	return
 }

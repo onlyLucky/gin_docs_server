@@ -8,6 +8,7 @@ import (
 )
 
 type JwyPayLoad struct {
+	UserName string `json:"userName"`
 	NickName string `json:"nickName"`
 	RoleID   uint   `json:"roleID"`
 	UserID   uint   `json:"userID"`
