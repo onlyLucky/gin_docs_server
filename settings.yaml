@@ -1,7 +1,7 @@
 system:
   env: release # debug  release  test
   ip: 127.0.0.1
-  port: 8080
+  port: 8088
   version: 1.0.1
 mysql:
   host: 127.0.0.1 # 如果不配置host就不会连接 mysql

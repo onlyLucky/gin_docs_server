@@ -2,7 +2,7 @@ package main
 
 import (
 	"gin_docs_server/core"
-	_ "gin_docs_server/docs"
+	// _ "gin_docs_server/docs"
 	"gin_docs_server/flags"
 	"gin_docs_server/global"
 	"gin_docs_server/routers"
